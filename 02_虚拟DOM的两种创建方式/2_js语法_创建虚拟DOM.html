@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js创建虚拟DOM</title>
+</head>
+<body>
+	<div id="test2"></div>
+	<!--引入react核心库（必须最先引入） -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+	<script type="text/javascript" >
+		const myId = 'aTGuIgU'
+		const myData = 'HeLlO,wOrlD!'
+		//1.创建虚拟DOM（js语法）
+		const VDOM = React.createElement('h1',{id:myId.toUpperCase()},React.createElement('span',{},myData.toUpperCase()))
+		//2.渲染虚拟DOM到页面
+		ReactDOM.render(VDOM,document.getElementById('test2'))
+
+		/* 
+			关于两种创建虚拟DOM的方式，你要知道的：
+					1.jsx语法创建虚拟DOM是最便捷的一种，在项目开发中一定写的是jsx。
+					2.我们几乎永远不会使用js语法去创建虚拟DOM，因为太麻烦、可阅读性不高。
+					3.jsx创建虚拟DOM的代码，经过babel的编译，一定会转换为js语法创建虚拟DOM的形式。
+					备注：所以也可以说jsx创建虚拟DOM的方式，是js创建虚拟DOM的一个语法糖
+		
+		 */
+	</script>
+
+</body>
+</html>

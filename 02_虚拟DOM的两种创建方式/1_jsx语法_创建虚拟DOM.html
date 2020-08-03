@@ -17,7 +17,11 @@
 		const myId = 'aTGuIgU'
 		const myData = 'HeLlO,wOrlD!'
 		//1.创建虚拟DOM
-		const VDOM = <h2 id={myId.toLowerCase()}>{myData.toLowerCase()}</h2>
+		const VDOM = (
+			<h2 id={myId.toLowerCase()}>
+				<span>{myData.toLowerCase()}</span>
+			</h2>
+		)
 		//2.渲染虚拟DOM到页面
 		ReactDOM.render(VDOM,document.getElementById('test1'))
 	</script>
