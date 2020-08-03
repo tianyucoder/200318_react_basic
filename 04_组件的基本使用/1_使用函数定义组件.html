@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数式组件</title>
+</head>
+<body>
+	<div id="test"></div>
+	<!--引入react核心库（必须最先引入） -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+			//1.创建组件————函数式
+			function Demo (){
+				console.log('@',this);//此处的this是undefined，因为经过babel的编译后，开启了严格模式。
+				return <h1>我是用函数定义的组件（适用于【简单组件】的定义）</h1>
+			}
+			//2.渲染组件到页面
+			ReactDOM.render(<Demo/>,document.getElementById('test'))
+			/* 
+					上述代码，当执行了ReactDOM.render(<Demo/>......之后发生了什么？
+							1.React发现<Demo/>
+								 1.1标签首字母若为【大写】：
+								 		(1).React检查是否定义了Demo组件（若未定义，报错：Demo is not defined）
+										(2).调用Demo，得到返回的虚拟DOM结构（若没有return，报错）
+								 1.2标签首字母若为【小写】
+								 		(1).检查标签是否能和html预设标签对应的上，若能，直接转为同名的html标签
+										(2).若未能和html预设标签对应的上，例如写的是：<haha></haha>，界面有效果，但会报错
+							2.把第一步返回的虚拟DOM，经过一个特殊的diff算法后，转为真实DOM，放入页面
+			 */
+	</script>
+
+</body>
+</html>
