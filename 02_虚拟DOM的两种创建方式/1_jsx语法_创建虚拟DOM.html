@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsx创建虚拟DOM</title>
+</head>
+<body>
+	<div id="test1"></div>
+	<!--引入react核心库（必须最先引入） -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+		const myId = 'aTGuIgU'
+		const myData = 'HeLlO,wOrlD!'
+		//1.创建虚拟DOM
+		const VDOM = <h2 id={myId.toLowerCase()}>{myData.toLowerCase()}</h2>
+		//2.渲染虚拟DOM到页面
+		ReactDOM.render(VDOM,document.getElementById('test1'))
+	</script>
+
+</body>
+</html>

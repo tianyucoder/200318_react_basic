@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, inistial-scale=1.0">
 	<title>hello,react !</title>
 </head>
 <body>
@@ -17,8 +16,22 @@
 	<script type="text/babel">//此处一定不要写javascript，要写babel，因为我们写的是jsx
 		//1.创建虚拟DOM
 		const VDOM = <h1>hello,react!</h1> //此处一定不要加引号，因为不是字符串
+		const trueDOM = document.getElementById('test')
 		//2.渲染虚拟DOM到页面(伴随着：VDOM转为真实DOM)
 		ReactDOM.render(VDOM,document.getElementById('test'))
+		console.log(VDOM);
+		console.log(trueDOM);
+		debugger;
+		/* 
+			关于虚拟DOM你要知道：
+				1.虚拟DOM到底是什么（对应js中哪一种数据类型）？
+						是普通的Object对象，只不过里面包含了一些react内部在用的一些特殊属性而已。
+				2.虚拟DOM和真实DOM有什么区别？
+						虚拟DOM比较“轻”，真实DOM比较“重”。
+						虚拟DOM是react内部在用的，无需真实DOM身上那么多的属性。
+						虚拟DOM最终一定会转换为真实DOM放入页面。
+
+		*/
 	</script>
 
 </body>
