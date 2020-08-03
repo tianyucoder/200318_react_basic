@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsx语法规则</title>
+	<style>
+		.title{
+			background-color: gray;
+		}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<!--引入react核心库（必须最先引入） -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+		const myId = 'aTGuIgU'
+		const myData = 'HeLlO,wOrlD!'
+		//1.创建虚拟DOM
+		const VDOM = (
+			<div>
+				<h2 className="title" id={myId.toLowerCase()}>
+					<span style={{color:'orange'}}>{myData.toLowerCase()}</span>
+				</h2>
+				<input type="text"/>
+				<h1>react请你好好的善待我</h1>
+			</div>
+		)
+		//2.渲染虚拟DOM到页面
+		ReactDOM.render(VDOM,document.getElementById('test'))
+		/* 
+			关于jsx你要知道的：
+					1.存在的意义：让程序员更加方便的去创建虚拟DOM，让结构和html一样清晰
+					2.jsx经过babel的编译，一定会转为js
+					3.jsx的语法规则：
+						(1).不要使用引号，因为不是字符串
+						(2).标签中混入js表达式，要用{}
+						(3).样式类名不要用class，要用className
+						(4).内联的样式要写成style={{xxxx:xxxx,xxxx:xxxx}}的形式
+						(5).必须只有一个跟标签
+						(6).标签必须闭合
+						(7).标签的开头字母，可以大写，可以小写
+								如果小写，那么jsx就把你写的标签去和html内置的标签进行对应：
+										1.如果对应上，就把jsx的标签直接转换为html标签，放入页面。
+										2.如果对应不上，就报错，但是内容可以展示。
+								如果大写，要特殊解析(一会聊)
+								
+
+		 */
+	</script>
+
+</body>
+</html>
