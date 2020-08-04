@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>受控组件</title>
 </head>
 <body>
@@ -14,6 +13,48 @@
 	<!-- 引入babel -->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 
+	<script type="text/babel">
+		//创建组价
+		class Login extends React.Component{
+			/* 
+				非受控组件：页面中输入类DOM的值，是通过ref现用现取
+				受控组件：页面中输入类DOM的值，随着输入维护进状态(推荐)
+			*/
+			state = {
+				username:'',
+				pwd:'',
+			}
+
+			//响应表单提交的回调
+			handleSubmit = (event)=>{
+				event.preventDefault() //阻止表单提交
+				const {username,pwd} = this.state
+				alert(`准备提交的用户名是${username}，密码是${pwd}`)
+			}
+			//用户名改变的回调
+			saveUserName = (event)=>{
+				const {target} = event
+				this.setState({username:target.value})
+			}
+			//密码改变的回调
+			savePwd = (event)=>{
+				const {target} = event
+				this.setState({pwd:target.value})
+			}
+
+			render(){
+				return(
+					<form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+						用户名：<input onChange={this.saveUserName} placeholder="请输入用户名"/>
+						密码：<input onChange={this.savePwd} placeholder="请输入密码"/>
+						<button type="submit">登录</button>
+					</form>	
+				)
+			}
+		}
+		//渲染组件
+		ReactDOM.render(<Login/>,document.getElementById('test'))
+	</script>
 	
 </body>
 </html>

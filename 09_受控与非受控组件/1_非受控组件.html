@@ -13,6 +13,36 @@
 	<!-- 引入babel -->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 
+	<script type="text/babel">
+		//创建组价
+		class Login extends React.Component{
+
+			//创建ref容器
+			usernameRef = React.createRef()
+			pwdRef = React.createRef()
+
+			//响应表单提交的回调
+			handleSubmit = (event)=>{
+				event.preventDefault() //阻止表单提交
+				const {usernameRef,pwdRef} = this
+				const username = usernameRef.current.value
+				const pwd = pwdRef.current.value
+				alert(`准备提交的用户名是${username}，密码是${pwd}`)
+			}
+
+			render(){
+				return(
+					<form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+						用户名：<input ref={this.usernameRef} placeholder="请输入用户名"/>
+						密码：<input ref={this.pwdRef} placeholder="请输入密码"/>
+						<button type="submit">登录</button>
+					</form>	
+				)
+			}
+		}
+		//渲染组件
+		ReactDOM.render(<Login/>,document.getElementById('test'))
+	</script>
 	
 </body>
 </html>
