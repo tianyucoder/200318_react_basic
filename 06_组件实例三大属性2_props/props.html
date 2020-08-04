@@ -15,10 +15,23 @@
 	<script type="text/javascript" src="../js/react-dom.development.js"></script>
 	<!-- 引入babel -->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
+	<!-- 引入prop-types，用于限制标签属性 -->
+	<script type="text/javascript" src="../js/prop-types.js"></script>
 
 	<script type="text/babel">
 	//创建组件
 	class Person extends React.Component{
+		//限制标签属性的类型、必要性
+		static propTypes = {
+			name:PropTypes.string.isRequired,
+			sex:PropTypes.string,
+			age:PropTypes.number,
+		}
+		//设置默认值
+		static defaultProps = {
+			sex:'不男不女',
+			age:18
+		}
 		render(){
 			const {name,sex,age,info,phone,address,car} = this.props
 			return (
@@ -27,31 +40,24 @@
 						<li>姓名：{name}</li>
 						<li>性别：{sex}</li>
 						<li>年龄：{age + 1}</li>
-						<li>性别1：{info}</li>
-						<li>性别2：{phone}</li>
-						<li>性别3：{address}</li>
-						<li>性别4：{car}</li>
 					</ul>
 					<hr/>
 				</div>
 			)
 		}
 	}
+	
 	//渲染组件
 	const p1 = {
-		name:"龙哥" ,
-		age:"18" ,
-		sex:"男" ,
-		info:"尚硅谷最帅的男人，没有之一" ,
-		phone:"" ,
-		address:"宏福科技园" ,
-		car:"哈雷"
+		name:'佩奇' ,
+		// age:28 ,
+		// sex:"男" ,
 	}
 	
 	ReactDOM.render(<Person name="超哥" age={19} sex="男"/>,document.getElementById('test'))
 	//React+babel环境，可以实现：三点运算符展开对象，但是仅仅适用于传递标签属性的时候。
 	ReactDOM.render(<Person {...p1}/>,document.getElementById('test2')) //改行代码和下面这行是等价的
-	//ReactDOM.render(<Person name="龙哥" age={18} sex="男" info="尚硅谷最帅的男人，没有之一" phone="13888888888" address="宏福科技园" car="哈雷"/>,document.getElementById('test2'))
+	//ReactDOM.render(<Person name="佩奇" age={18} sex="男" />,document.getElementById('test2'))
 	
 
 	</script>

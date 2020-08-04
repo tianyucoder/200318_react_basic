@@ -14,7 +14,27 @@
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 	<!-- 引入prop-type -->
 	<script type="text/javascript" src="../js/prop-types.js"></script>
-
 	
+	<script type="text/babel">
+		//定义组件
+		class Show extends React.Component{
+
+			demo = ()=>{
+				alert(this.peiqi.value)
+			}
+
+			render(){
+				return(
+					<div>
+						<input ref={currentNode => this.peiqi = currentNode} type="text"/>&nbsp;
+						<button onClick={this.demo}>点我提示左侧内容</button>	
+					</div>
+				)
+			}
+		}
+		//渲染组件
+		ReactDOM.render(<Show/>,document.getElementById('test'))
+	</script>
+
 </body>
 </html>

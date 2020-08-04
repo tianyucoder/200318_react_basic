@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>ref</title>
+	<title>字符串ref</title>
 </head>
 <body>
 	<div id="test"></div>
@@ -15,6 +15,29 @@
 	<!-- 引入prop-type -->
 	<script type="text/javascript" src="../js/prop-types.js"></script>
 	
+	<script type="text/babel">
+		//定义组件
+		class Show extends React.Component{
+
+			demo = ()=>{
+				console.log(this.refs.userinput);//获取到的是真实DOM
+				console.log(this.refs);
+				alert(this.refs.userinput.value);
+			}
+
+			render(){
+				return(
+					<div>
+						{/* 如下这种写法是字符串类型的ref，react17.x即将弃用，官方不推荐 */}
+						<input ref="userinput" type="text"/>&nbsp;
+						<button ref="btn" onClick={this.demo}>点我提示左侧内容</button>	
+					</div>
+				)
+			}
+		}
+		//渲染组件
+		ReactDOM.render(<Show/>,document.getElementById('test'))
+	</script>
 
 </body>
 </html>

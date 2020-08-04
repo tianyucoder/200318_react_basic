@@ -14,7 +14,31 @@
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 	<!-- 引入prop-type -->
 	<script type="text/javascript" src="../js/prop-types.js"></script>
-
 	
+	<script type="text/babel">
+		//定义组件
+		class Show extends React.Component{
+
+			myContainer1 = React.createRef() //创建一个ref容器，可以存放节点，但只能存一个
+			myContainer2 = React.createRef() //创建一个ref容器，可以存放节点，但只能存一个
+
+			demo = ()=>{
+				alert(this.myContainer1.current.value);
+				console.log(this.myContainer2.current);
+			}
+
+			render(){
+				return(
+					<div>
+						<input ref={this.myContainer1} type="text"/>&nbsp;
+						<button ref={this.myContainer2} onClick={this.demo}>点我提示左侧内容</button>	
+					</div>
+				)
+			}
+		}
+		//渲染组件
+		ReactDOM.render(<Show/>,document.getElementById('test'))
+	</script>
+
 </body>
 </html>

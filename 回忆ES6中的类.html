@@ -67,6 +67,18 @@
 		const animal = new Animal('jerry','雌性')
 		console.log(animal);
 
+		class Dog {
+			constructor(name,age){
+				this.name = name
+				this.age = age
+			}
+			static run (){ //run方法不是给实例用的了，而是给Dog类本身用的
+				console.log('狗在奔跑');
+			}
+		}
+		Dog.run()
+
+
 	</script>
 </body>
 </html>
