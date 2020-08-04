@@ -40,11 +40,32 @@
 			}
 		}
 
-		const p = new Person('tom',20)
+		/* const p = new Person('tom',20)
 		const s = new Student('tom',20,'高一','atguigu')
 		console.log(s);
-		console.log(p);
+		console.log(p); */
 
+		/* 
+			类中能写什么代码？
+				1.构造器方法
+				2.一般方法
+				3.赋值语句 
+		*/
+		class Animal {
+			//构造器方法
+			constructor(name,sex){
+				this.name = name
+				this.sex = sex
+			}
+			//一般方法
+			run(){
+				console.log('我疯狂的奔跑中');
+			}
+			a = 1 //改行代码含义为：向类的实例对象上追加一个a属性，值为：1
+		}
+
+		const animal = new Animal('jerry','雌性')
+		console.log(animal);
 
 	</script>
 </body>
