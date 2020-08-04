@@ -25,6 +25,11 @@
 
 		//Student类，是继承Person类的——子类
 		class Student extends Person{
+			/* constructor(name,age,grade,school){
+				super(name,age) //借助super去调用父类的构造器,减少子类构造器中的代码
+			  this.grade = grade
+			  this.school = school
+			} */
 			constructor(...args){
 				super(...args) //借助super去调用父类的构造器,减少子类构造器中的代码
 			  this.grade = args[args.length-2]
