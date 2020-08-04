@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>回忆类</title>
+</head>
+<body>
+	<script type="text/javascript" >
+		
+		//Person类---父类
+		class Person {
+			//为啥要写构造器方法？—— 1.接收new该类的时候传入的参数。2.向类的实例对象上追加属性
+			constructor(name,age){
+				//构造器中this是谁？——类的实例对象
+				this.name = name //此句话要干啥？ 在类的实例对象上追加一个name属性，值为传入的name
+				this.age = age
+			}
+			//一般方法
+			speak(){ //speak方法放在了Person的原型对象上，没放在自身，但是自身可以调用
+				//程序员自定义的speak方法中——this是类的实例对象
+				console.log(`我的名字是${this.name}，我的年龄是${this.age}`);
+			}
+		}
+
+		//Student类，是继承Person类的——子类
+		class Student extends Person{
+			constructor(...args){
+				super(...args) //借助super去调用父类的构造器,减少子类构造器中的代码
+			  this.grade = args[args.length-2]
+			  this.school = args[args.length-1]
+			}
+			study(){//study方法放在了Student的原型对象上，没放在自身
+				console.log('我在很努力的学习！');
+			}
+		}
+
+		const p = new Person('tom',20)
+		const s = new Student('tom',20,'高一','atguigu')
+		console.log(s);
+		console.log(p);
+
+
+	</script>
+</body>
+</html>
