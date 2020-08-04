@@ -17,7 +17,7 @@
 				this.age = age
 			}
 			//一般方法
-			speak(){ //speak方法放在了Person的原型对象上，没放在自身，但是自身可以调用
+			speak(){ //speak方法放在了Person的原型对象上，没放在实例身上，但是实例可以调用
 				//程序员自定义的speak方法中——this是类的实例对象
 				console.log(`我的名字是${this.name}，我的年龄是${this.age}`);
 			}
