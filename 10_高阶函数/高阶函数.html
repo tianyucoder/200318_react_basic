@@ -22,6 +22,16 @@
 										例如：setTimeout、Promise、arr.map、arr.filter、arr.reduce等等
 			二、函数柯里化：
 							通过函数来返回函数实现多次接收数据，最后统一进行处理的函数编码形式
+							//add是柯里化函数
+							function add (a){
+								return (b)=>{
+									return (c)=>{
+										return a+b+c
+									}
+								}
+							}
+							const result2 = add(1)(2)(3)
+							console.log(result2);
 		*/
 		//创建组价
 		class Login extends React.Component{

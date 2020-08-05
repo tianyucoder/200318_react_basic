@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>生命周期(新)</title>
+	<title>demo</title>
 </head>
 <body>
 	<div id="test"></div>
@@ -22,9 +22,13 @@
 			constructor(...a){
 				console.log('---constructor---');
 				super(...a)
-				this.state = {count:1}
+				this.state = {count:0}
 			}
 
+			//组件将要挂载
+			componentWillMount(){
+				console.log('---componentWillMount---');
+			}
 
 			//组件已经挂载完毕
 			componentDidMount(){
@@ -34,22 +38,17 @@
 			//更新的“阀门”
 			shouldComponentUpdate(){
 				console.log('---shouldComponentUpdate---');
-				return true
+				return false
 			}
 
-			/* static getDerivedStateFromProps(props){
-				console.log('---getDerivedStateFromProps---');
-				return props
-			} */
-
-			/* getSnapshotBeforeUpdate(preProps,preState){
-				console.log('---getSnapshotBeforeUpdate---',preProps,preState);
-				return '666666'
-			} */
+			//组件将要更新
+			componentWillUpdate(){
+				console.log('---componentWillUpdate---');
+			}
 
 			//组件完成更新
-			componentDidUpdate(preProps,preState,params){
-				console.log('---componentDidUpdate---',preProps,preState,params);
+			componentDidUpdate(){
+				console.log('---componentDidUpdate---');
 			}
 
 			//组件将要卸载
@@ -89,6 +88,9 @@
 		}
 		//定义一个子组件
 		class Demo extends React.Component{
+			componentWillReceiveProps(a){
+				console.log('---componentWillReceiveProps---',a);
+			}
 			render(){
 				return(
 					<h3>我接收到的名字是：{this.props.name}</h3>
@@ -96,7 +98,7 @@
 			}
 		}
 		//渲染组件
-		ReactDOM.render(<Count fankai="junyan"/>,document.getElementById('test'))
+		ReactDOM.render(<Count name="tom"/>,document.getElementById('test'))
 		
 	</script>
 
