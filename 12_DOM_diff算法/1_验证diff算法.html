@@ -17,6 +17,20 @@
   /*
 		验证DOM Diff算法——最小化页面重绘
   */
+ /* 
+		旧的虚拟DOM：
+		 <p>
+				Hello，<input type="text"/>
+				<span>现在是:10:01</span>
+		 </p>
+
+		新的虚拟DOM：
+		 <p>
+				Hello，<input type="text"/>
+				<span>现在是:10:02</span>
+		 </p>
+
+ */
 
   class HelloWorld extends React.Component {
     state = {
@@ -34,7 +48,7 @@
     render () {
       return (
         <p>
-          Hello,<input type="text"/>
+          Hello，<input type="text"/>
 					<span>现在是：{this.state.date.toTimeString()}</span>
         </p>
       )

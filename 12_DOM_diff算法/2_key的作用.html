@@ -5,7 +5,7 @@
   <title>10_key</title>
 </head>
 <body>
-<div id="root"></div>
+<div id="test"></div>
 <!-- 引入react核心库 -->
 <script type="text/javascript" src="../js/react.development.js"></script>
 <!-- 引入react-dom -->
@@ -46,6 +46,96 @@
 								1.最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
 								2.如果确定只是简单的展示数据，用index也是可以的。
    */
+
+	 /* 
+		一、使用index作为key：
+
+				  旧的数据：
+							{id:34565456,name:'小张',age:12},
+							{id:90878689,name:'小李',age:13},
+					旧的虚拟DOM：
+							<li key=0>小张--12<input/></li>
+							<li key=1>小李--13<input/></li>
+
+---------------添加小王以后-----
+
+					新的数据：
+							{id:98668632,name:'小王',age:14},
+							{id:34565456,name:'小张',age:12},
+							{id:90878689,name:'小李',age:13},
+					新的虚拟DOM：
+							<li key=0>小王--14<input/></li> ----->不能使用之前的真实DOM了，只能生成新的真实DOM，随后插入页面
+							<li key=1>小张--12<input/></li> ----->不能使用之前的真实DOM了，只能生成新的真实DOM，随后插入页面
+							<li key=2>小李--13<input/></li> ----->不能使用之前的真实DOM了，只能生成新的真实DOM，随后插入页面
+	
+
+			二、使用id作为key：
+
+				  旧的数据：
+							{id:34565456,name:'小张',age:12},
+							{id:90878689,name:'小李',age:13},
+					旧的虚拟DOM：
+							<li key=34565456>小张--12<input/></li>
+							<li key=90878689>小李--13<input/></li>
+
+---------------添加小王以后-----
+
+					新的数据：
+							{id:98668632,name:'小王',age:14},
+							{id:34565456,name:'小张',age:12},
+							{id:90878689,name:'小李',age:13},
+					新的虚拟DOM：
+							<li key=98668632>小王--14<input/></li> --->不能使用之前的真实DOM了，只能生成新的真实DOM，随后插入页面
+							<li key=34565456>小张--12<input/></li> --->直接使用之前的
+							<li key=90878689>小李--13<input/></li> --->直接使用之前的
+
+	 */
+	 class List extends React.Component{
+
+		state = {
+			persons:[
+				{id:34565456,name:'小张',age:12},
+				{id:90878689,name:'小李',age:13},
+			],
+			a:1
+		}
+		
+		addWang = ()=>{
+			const wang = {id:Date.now(),name:'小王',age:14}
+			// state中的数据不能直接修改
+			/* let {persons} = this.state
+			persons.unshift(wang)
+			this.setState({persons}) */
+			this.setState({persons:[wang,...this.state.persons]}) //注意，state中有对象类型的数据，要这样写
+		}
+
+		 render(){
+			 return (
+				 <div>
+						<button onClick={this.addWang}>添加一个小王</button>
+						<h2>使用遍历时的index作为key</h2>
+						<ul>
+							{
+								this.state.persons.map((person,index)=>{
+									return <li key={index}>{person.name}--{person.age}<input/></li>
+								})
+							}
+						</ul>
+						<hr/>
+						<h2>使用数据的唯一标识(本例用的是id)作为标识</h2>
+						<ul>
+							{
+								this.state.persons.map((person)=>{
+									return <li key={person.id}>{person.name}--{person.age}<input/></li>
+								})
+							}
+						</ul>
+				 </div>
+			 )
+		 }
+	 }
+	 //渲染组件
+	 ReactDOM.render(<List/>,document.getElementById('test'))
 
 </script>
 </body>
