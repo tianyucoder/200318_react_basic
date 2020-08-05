@@ -22,9 +22,6 @@
 										例如：setTimeout、Promise、arr.map、arr.filter、arr.reduce等等
 			二、函数柯里化：
 							通过函数来返回函数实现多次接收数据，最后统一进行处理的函数编码形式
-
-		
-		
 		*/
 		//创建组价
 		class Login extends React.Component{
@@ -58,13 +55,21 @@
 				}
 			}
 
+			show = ()=>{
+				alert(1)
+			}
+
 			render(){
 				return(
-					<form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
-						用户名：<input onChange={this.saveFormData('username')} placeholder="请输入用户名"/>
-						密码：<input onChange={this.saveFormData('pwd')} placeholder="请输入密码"/>
-						<button type="submit">登录</button>
-					</form>	
+					<div>
+						<form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+							用户名：<input onChange={this.saveFormData('username')} placeholder="请输入用户名"/>
+							密码：<input onChange={this.saveFormData('pwd')} placeholder="请输入密码"/>
+							<button >登录</button>
+						</form>
+						<button onClick={this.show}>点我弹窗1</button>
+						<button onClick={()=>alert(1)}>点我弹窗2</button>
+					</div>
 				)
 			}
 		}
