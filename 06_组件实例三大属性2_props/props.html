@@ -53,7 +53,6 @@
 		// age:28 ,
 		// sex:"男" ,
 	}
-	
 	ReactDOM.render(<Person name="超哥" age={19} sex="男"/>,document.getElementById('test'))
 	//React+babel环境，可以实现：三点运算符展开对象，但是仅仅适用于传递标签属性的时候。
 	ReactDOM.render(<Person {...p1}/>,document.getElementById('test2')) //改行代码和下面这行是等价的
