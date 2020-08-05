@@ -14,5 +14,44 @@
 	<!-- 引入babel -->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 
+	<script type="text/babel" >
+			//定义组件
+			class Life extends React.Component{
+				state = {
+					opacity:0.5
+				}
+
+				death = ()=>{
+					//卸载组件
+					ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+				}
+
+				componentDidMount(){
+					this.timer = setInterval(() => {
+						let {opacity} = this.state
+						opacity -= 0.1
+						if(opacity <= 0 ) opacity = 1
+						this.setState({opacity})
+					}, 200);
+				}
+
+				componentWillUnmount(){
+					clearInterval(this.timer)
+				}
+
+				render(){ //render执行几次？1+n次 ，1是初始化的那次，n是状态更新几次
+					const {opacity} = this.state
+					return (
+						<div>
+							<h1 style={{opacity}}>React学不会，怎么办？</h1>
+							<button onClick={this.death}>不活了</button>
+						</div>
+					)
+				}
+			}
+			//渲染组件
+			ReactDOM.render(<Life/>,document.getElementById('test'))
+	</script>
+
 </body>
 </html>
