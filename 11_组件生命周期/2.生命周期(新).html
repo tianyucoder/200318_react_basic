@@ -37,11 +37,13 @@
 				return true
 			}
 
+			//无论什么情况，状态都是props的值时，用这个钩子
 			/* static getDerivedStateFromProps(props){
 				console.log('---getDerivedStateFromProps---');
 				return props
 			} */
 
+			//在更新之前想留下最后一刻的props和state时我们用这个钩子
 			/* getSnapshotBeforeUpdate(preProps,preState){
 				console.log('---getSnapshotBeforeUpdate---',preProps,preState);
 				return '666666'
