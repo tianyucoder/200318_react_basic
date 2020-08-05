@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>引出生命周期</title>
+	<title>生命周期(旧)</title>
 </head>
 <body>
 	<div id="test"></div>
@@ -15,83 +15,43 @@
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 
 	<script type="text/babel" >
-		//定义一个父组件
-		class Parent extends React.Component{
-			state = {carCount:1,isShowChild:true}
+			//定义组件
+			class Life extends React.Component{
+				state = {
+					opacity:1
+				}
 
-			//组件卸载之前
-			componentWillUnmount(){
-				console.log('---parent componentWillUnmount---');
-			}
-			//添加一辆车
-			addCar = ()=>{
-				const {carCount} = this.state
-				this.setState({carCount:carCount+1})
-			}
-			//卸载Parent组件
-			death = ()=>{
-				ReactDOM.unmountComponentAtNode(document.getElementById('test'))
-			}
-			//隐藏Child组件
-			hiddenChild= ()=>{
-				this.setState({isShowChild:false})
-			}
+				death = ()=>{
+					//卸载组件
+					ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+				}
 
-			render(){
-				return(
-					<div>
-						<h1>我是Parent组件，我有<span style={{color:'red'}}>{this.state.carCount}</span>台车</h1>
-						<button onClick={this.addCar}>再提1台车</button>
-						<button onClick={this.death}>卸载Parent组件</button>
-						<button onClick={this.hiddenChild}>隐藏Child组件</button>
-						<hr/>
-						{this.state.isShowChild ? <Child/> : null} 
-					</div>
-				)
-			}
-		}
-		//定义一个子组件 
-		class Child extends React.Component{
-			//构造器
-			constructor(...params){
-				console.log('---child constructor---');
-				super(...params)
-				this.state = {toyCount:1}
-			}
-			
-			//组件挂载之前
-			componentWillMount(){
-				console.log('---child componentWillMount---');
-			}
+				componentDidMount(){
+					this.timer = setInterval(() => {
+						console.log('timer');
+						let {opacity} = this.state
+						opacity -= 0.1
+						if(opacity <= 0 ) opacity = 1
+						this.setState({opacity})
+					}, 200);
+				}
 
-			//组件完成挂载
-			componentDidMount(){
-				console.log('---child componentDidMount---');
-			}
+				componentWillUnmount(){
+					clearInterval(this.timer)
+				}
 
-			//组件卸载之前
-			componentWillUnmount(){
-				console.log('---child componentWillUnmount---');
+				render(){ //render执行几次？1+n次 ，1是初始化的那次，n是状态更新几次
+					const {opacity} = this.state
+					return (
+						<div>
+							<h1 style={{opacity}}>React学不会，怎么办？</h1>
+							<button onClick={this.death}>不活了</button>
+						</div>
+					)
+				}
 			}
-
-			//添加一个玩具
-			addToy = ()=>{
-				const {toyCount} = this.state
-				this.setState({toyCount:toyCount+1})
-			}
-
-			render(){
-				console.log('---child render---');
-				return(
-					<div>
-						<h1>我是Child组件，我有<span style={{color:'red'}}>{this.state.toyCount}</span>个玩具</h1>
-						<button onClick={this.addToy}>再买1个玩具</button>
-					</div>
-				)
-			}
-		}
-		//渲染组件
-		ReactDOM.render(<Parent/>,document.getElementById('test'))
+			//渲染组件
+			ReactDOM.render(<Life/>,document.getElementById('test'))
 	</script>
 
 </body>
